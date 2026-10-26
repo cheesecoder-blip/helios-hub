@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Helios Hub - Digital Resource Library</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☀️</text></svg>">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+</head>
+<body>
+  <div id="mainHeader"></div>
+
+  <main class="container">
+    <div class="card">
+      <h1 class="card-title">📁 Digital Resource Library</h1>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
+        Upload learning materials, documents, spreadsheets, PDFs, and images (Max 50MB per file). Audio and Video files are strictly restricted.
+      </p>
+
+      <!-- FILE UPLOAD INPUT -->
+      <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem; align-items: center;">
+        <input type="file" id="libraryFileInput" class="form-control" accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.png,.jpg,.jpeg,.zip">
+        <button class="btn btn-primary" onclick="uploadLibraryAsset()">Upload File</button>
+      </div>
+
+      <!-- ASSETS LIST -->
+      <div id="libraryAssetList">
+        <p style="color: var(--text-muted);">Loading library assets...</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Helios Hub v11 &copy; 2026. Digital Library powered by Supabase Cloud Storage.</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      enforceAuthGuard("protected");
+      initLibraryPage();
+    });
+  </script>
+</body>
+</html>

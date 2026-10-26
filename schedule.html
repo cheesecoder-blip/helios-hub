@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Helios Hub - 365-Day Schedule Calendar</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☀️</text></svg>">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+</head>
+<body>
+  <div id="mainHeader"></div>
+
+  <main class="container">
+    <div class="card">
+      <div class="calendar-header">
+        <h1 class="card-title" style="border: none; padding: 0; margin: 0;">📅 365-Day Schedule</h1>
+        <div>
+          <button class="btn btn-secondary btn-sm" onclick="changeCalMonth(-1)">◀ Prev Month</button>
+          <span id="calMonthYearTitle" style="font-weight: 700; margin: 0 0.75rem;">October 2026</span>
+          <button class="btn btn-secondary btn-sm" onclick="changeCalMonth(1)">Next Month ▶</button>
+        </div>
+      </div>
+
+      <div class="calendar-grid" id="calendarGrid">
+        <!-- Calendar Grid rendered via JS -->
+      </div>
+    </div>
+  </main>
+
+  <!-- EVENT MODAL -->
+  <div class="modal-overlay" id="eventModal">
+    <div class="modal-content">
+      <h3 style="font-size: 1.2rem; margin-bottom: 0.5rem;">Events for <span id="modalSelectedDate" style="color: var(--primary);">2026-10-25</span></h3>
+      <input type="hidden" id="modalDateInput">
+
+      <div id="dayEventsList" style="max-height: 200px; overflow-y: auto; margin-bottom: 1rem;">
+        <!-- Day events list -->
+      </div>
+
+      <div class="form-group">
+        <label>Add New Event Title</label>
+        <input type="text" id="modalTitleInput" class="form-control" placeholder="Group study session...">
+      </div>
+      <div class="form-group">
+        <label>Time (Optional)</label>
+        <input type="time" id="modalTimeInput" class="form-control">
+      </div>
+
+      <div style="display: flex; gap: 0.5rem; justify-content: flex-end;">
+        <button class="btn btn-secondary" onclick="closeEventModal()">Close</button>
+        <button class="btn btn-primary" onclick="addCalendarEvent()">Save Event</button>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>Helios Hub v11 &copy; 2026. Interactive 365-Day Schedule Calendar.</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      enforceAuthGuard("protected");
+      initSchedulePage();
+    });
+  </script>
+</body>
+</html>

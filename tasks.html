@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Helios Hub - Tasks & To-Do List</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☀️</text></svg>">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+</head>
+<body>
+  <div id="mainHeader"></div>
+
+  <main class="container">
+    <div class="card">
+      <h1 class="card-title">📝 Tasks & To-Do List</h1>
+
+      <!-- CREATE TASK -->
+      <div class="grid-3" style="margin-bottom: 1.5rem; align-items: flex-end;">
+        <div>
+          <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 0.3rem;">Task Title</label>
+          <input type="text" id="taskTitleInput" class="form-control" placeholder="Complete Science worksheet...">
+        </div>
+        <div>
+          <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 0.3rem;">Due Date</label>
+          <input type="date" id="taskDateInput" class="form-control">
+        </div>
+        <div>
+          <label style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-bottom: 0.3rem;">Link Subject</label>
+          <select id="taskSubjectSelect" class="form-control">
+            <option value="">-- Optional Subject --</option>
+            <option value="Science">Science</option>
+            <option value="Research">Research</option>
+            <option value="Mathematics">Mathematics</option>
+            <option value="English">English</option>
+            <option value="Filipino">Filipino</option>
+            <option value="Values Education">Values Education</option>
+            <option value="Araling Panlipunan">Araling Panlipunan</option>
+            <option value="MAPEH">MAPEH</option>
+            <option value="Creative Technologies">Creative Technologies</option>
+          </select>
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="addTask()" style="margin-bottom: 1.5rem;">+ Create Task</button>
+
+      <!-- TASK LIST -->
+      <div id="taskList">
+        <p style="color: var(--text-muted);">Loading tasks...</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Helios Hub v11 &copy; 2026. Task Management System.</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      enforceAuthGuard("protected");
+      initTasksPage();
+    });
+  </script>
+</body>
+</html>

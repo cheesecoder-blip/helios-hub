@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Helios Hub - Officer of the Day</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☀️</text></svg>">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/supabase-config.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+</head>
+<body>
+  <div id="mainHeader"></div>
+
+  <main class="container">
+    <div class="card">
+      <h1 class="card-title">🛡️ Officer of the Day (OD) Rotator</h1>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
+        Rotates automatically every day at 7:00 AM. Clean roster with support for up to 40 members.
+      </p>
+
+      <div class="property-row" style="background: rgba(59, 130, 246, 0.15); border-color: rgba(59, 130, 246, 0.4); margin-bottom: 1.5rem;">
+        <div>
+          <span style="font-size: 0.9rem; color: var(--text-muted);">Active Officer Today (7:00 AM Shift):</span>
+          <h2 id="activeOdBadge" style="color: var(--accent); font-size: 1.5rem; margin-top: 0.2rem;">None</h2>
+        </div>
+        <button id="pauseOdBtn" class="btn btn-secondary" onclick="toggleOdPause()">⏸️ Pause Rotation</button>
+      </div>
+
+      <!-- ADD MEMBER -->
+      <div style="display: flex; gap: 0.5rem; margin-bottom: 1.5rem;">
+        <input type="text" id="odNameInput" class="form-control" placeholder="Enter student name to add to roster..." onkeypress="if(event.key === 'Enter') addOdMember()">
+        <button class="btn btn-primary" onclick="addOdMember()">Add Member</button>
+      </div>
+
+      <!-- ROSTER LIST -->
+      <ul class="od-list" id="odList">
+        <li class="od-item"><span>Loading roster...</span></li>
+      </ul>
+    </div>
+  </main>
+
+  <footer>
+    <p>Helios Hub v11 &copy; 2026. Daily 7:00 AM OD Rotation.</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      enforceAuthGuard("protected");
+      initOdPage();
+    });
+  </script>
+</body>
+</html>
